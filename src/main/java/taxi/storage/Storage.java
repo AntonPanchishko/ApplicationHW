@@ -7,10 +7,10 @@ import taxi.model.Driver;
 import taxi.model.Manufacturer;
 
 public class Storage {
-    private static long manufactureId = 0;
     public static final List<Car> cars = new ArrayList<>();
     public static final List<Driver> drivers = new ArrayList<>();
     public static final List<Manufacturer> manufacturers = new ArrayList<>();
+    private static long manufactureId = 0;
 
     public static void addManufacture(Manufacturer manufacturer) {
         manufactureId++;
