@@ -1,23 +1,23 @@
 package taxi.model;
 
-import java.util.List;
 import java.util.Objects;
 
 public class Manufacturer {
     private long id;
     private String model;
-    private List<Driver> drivers;
+    private String country;
 
-    public Manufacturer(String model) {
+    public Manufacturer(String model, String country) {
         this.model = model;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+        this.country = country;
     }
 
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getModel() {
@@ -28,31 +28,30 @@ public class Manufacturer {
         this.model = model;
     }
 
-    public List<Driver> getDrivers() {
-        return drivers;
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         Manufacturer that = (Manufacturer) o;
-        return id == that.id && Objects.equals(model, that.model)
-                && Objects.equals(drivers, that.drivers);
+        return id == that.id && Objects.equals(model, that.model) && Objects.equals(country, that.country);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, model, drivers);
+        return Objects.hash(id, model, country);
     }
 
     @Override
     public String toString() {
-        return "Manufacturer{" + "id=" + id + ", taxi.model='" + model + '\''
-                + ", drivers=" + drivers + '}';
+        return "Manufacturer{" + "id=" + id + ", model='"
+                + model + '\'' + ", country='" + country + '\'' + '}';
     }
 }

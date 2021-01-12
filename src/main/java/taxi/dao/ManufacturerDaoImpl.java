@@ -1,6 +1,7 @@
 package taxi.dao;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import taxi.lib.Dao;
 import taxi.model.Manufacturer;
@@ -26,11 +27,12 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
 
     @Override
     public Manufacturer update(Manufacturer manufacturer) {
-        return Storage.manufacturers.set((int) manufacturer.getId(), manufacturer);
+        return Storage.manufacturers
+                .set(Storage.manufacturers.indexOf(manufacturer), manufacturer);
     }
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        return Storage.manufacturers.removeIf(i -> Objects.equals(i.getId(), id));
     }
 }

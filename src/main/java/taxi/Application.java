@@ -10,9 +10,9 @@ public class Application {
     public static void main(String[] args) {
         ManufacturerService manufacturerService =
                 (ManufacturerService) injector.getInstance(ManufacturerService.class);
-        Manufacturer volkswagen = new Manufacturer("BMW");
-        Manufacturer audi = new Manufacturer("Audy");
-        Manufacturer tesla = new Manufacturer("Mercedes");
+        Manufacturer volkswagen = new Manufacturer("BMW", "German");
+        Manufacturer audi = new Manufacturer("Audy", "German");
+        Manufacturer tesla = new Manufacturer("Mercedes", "German");
 
         manufacturerService.create(volkswagen);
         manufacturerService.create(audi);
