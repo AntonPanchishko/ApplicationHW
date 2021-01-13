@@ -6,7 +6,6 @@ import java.util.Objects;
 import java.util.Optional;
 import taxi.lib.Dao;
 import taxi.model.Car;
-import taxi.model.Driver;
 import taxi.storage.Storage;
 
 @Dao
@@ -40,15 +39,6 @@ public class CarDaoImpl implements CarDao {
     @Override
     public boolean delete(Long id) {
         return Storage.cars.removeIf(e -> Objects.equals(e.getId(), id));
-    }
-
-    @Override
-    public void addDriverToCar(Driver driver, Car car) {
-        for (int i = 0; i < Storage.cars.size(); i++) {
-            if (Objects.equals(car.getId(), Storage.cars.get(i).getId())) {
-                Storage.cars.get(i).getDrivers().add(driver);
-            }
-        }
     }
 
     @Override
