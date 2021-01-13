@@ -3,7 +3,7 @@ package taxi.model;
 import java.util.Objects;
 
 public class Manufacturer {
-    private long id;
+    private Long id;
     private String model;
     private String country;
 

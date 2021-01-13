@@ -3,7 +3,7 @@ package taxi.model;
 import java.util.Objects;
 
 public class Driver {
-    private long id;
+    private Long id;
     private String name;
     private String licenceNumber;
 
