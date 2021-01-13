@@ -45,22 +45,21 @@ public class CarServiceImpl implements CarService {
         carDao.addDriverToCar(driver, car);
     }
 
-    @Override
     public void removeDriverFromCar(Driver driver, Car car) {
-        Storage.cars.stream()
+        carDao.getAll().stream()
                 .filter(e -> Objects.equals(e, car))
                 .findFirst().get()
                 .getDrivers()
                 .removeIf(e -> Objects.equals(e, driver));
     }
 
-    @Override
     public List<Car> getAllByDriver(Long driverId) {
         List<Car> carsByDriver = new ArrayList<>();
 
-        for (int i = 0; i < Storage.cars.size(); i++) {
-            for (int j = 0; j < Storage.cars.get(j).getDrivers().size(); j++) {
-                if (Objects.equals(Storage.cars.get(j).getDrivers().get(j).getId(), driverId)) {
+        for (int i = 0; i < carDao.getAll().size(); i++) {
+            for (int j = 0; j < carDao.getAll().get(j).getDrivers().size(); j++) {
+                if (Objects.equals(carDao.getAll().get(j)
+                        .getDrivers().get(j).getId(), driverId)) {
                     carsByDriver.add(Storage.cars.get(i));
                 }
             }

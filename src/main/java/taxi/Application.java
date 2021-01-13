@@ -40,12 +40,13 @@ public class Application {
                 (CarService) injector.getInstance(CarService.class);
         carService.create(x5);
         carService.create(w221);
+        carService.create(q8);
         carService.getAll();
         carService.addDriverToCar(vasya, x5);
         carService.addDriverToCar(petrovich, w221);
         carService.addDriverToCar(ivan, q8);
         System.out.println(carService.getAll());
-        System.out.println(carService.getAllByDriver(1L));
+        System.out.println(carService.getAllByDriver(2L));
         carService.removeDriverFromCar(vasya, x5);
         carService.delete(1L);
         System.out.println(carService.getAll());
