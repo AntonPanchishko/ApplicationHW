@@ -1,7 +1,9 @@
 package taxi.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import taxi.lib.Dao;
 import taxi.model.Car;
 import taxi.model.Driver;
@@ -16,10 +18,10 @@ public class CarDaoImpl implements CarDao {
     }
 
     @Override
-    public Car get(Long id) {
+    public Optional<Car> get(Long id) {
         return Storage.cars.stream()
                 .filter(e -> Objects.equals(e.getId(), id))
-                .findFirst().get();
+                .findFirst();
     }
 
     @Override
@@ -30,9 +32,9 @@ public class CarDaoImpl implements CarDao {
     @Override
     public Car update(Car car) {
         Long currentCarId = car.getId();
-        Car oldCar = get(currentCarId);
+        Car oldCar = get(car.getId()).get();
         Storage.cars.set(Storage.cars.indexOf(oldCar), car);
-        return get(currentCarId);
+        return get(currentCarId).get();
     }
 
     @Override
@@ -47,5 +49,19 @@ public class CarDaoImpl implements CarDao {
                 Storage.cars.get(i).getDrivers().add(driver);
             }
         }
+    }
+
+    @Override
+    public List<Car> getAllByDriver(Long driverId) {
+        List<Car> carsByDriver = new ArrayList<>();
+        for (int i = 0; i < Storage.cars.size(); i++) {
+            for (int j = 0; j < Storage.cars.get(j).getDrivers().size(); j++) {
+                if (Objects.equals(Storage.cars.get(j)
+                        .getDrivers().get(j).getId(), driverId)) {
+                    carsByDriver.add(Storage.cars.get(i));
+                }
+            }
+        }
+        return carsByDriver;
     }
 }

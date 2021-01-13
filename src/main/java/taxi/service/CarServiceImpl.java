@@ -1,14 +1,11 @@
 package taxi.service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import taxi.dao.CarDao;
 import taxi.lib.Inject;
 import taxi.lib.Service;
 import taxi.model.Car;
 import taxi.model.Driver;
-import taxi.storage.Storage;
 
 @Service
 public class CarServiceImpl implements CarService {
@@ -22,7 +19,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Car get(Long id) {
-        return carDao.get(id);
+        return carDao.get(id).get();
     }
 
     @Override
@@ -46,24 +43,11 @@ public class CarServiceImpl implements CarService {
     }
 
     public void removeDriverFromCar(Driver driver, Car car) {
-        carDao.getAll().stream()
-                .filter(e -> Objects.equals(e, car))
-                .findFirst().get()
-                .getDrivers()
-                .removeIf(e -> Objects.equals(e, driver));
+        car.getDrivers().remove(driver);
+        carDao.update(car);
     }
 
     public List<Car> getAllByDriver(Long driverId) {
-        List<Car> carsByDriver = new ArrayList<>();
-
-        for (int i = 0; i < carDao.getAll().size(); i++) {
-            for (int j = 0; j < carDao.getAll().get(j).getDrivers().size(); j++) {
-                if (Objects.equals(carDao.getAll().get(j)
-                        .getDrivers().get(j).getId(), driverId)) {
-                    carsByDriver.add(Storage.cars.get(i));
-                }
-            }
-        }
-        return carsByDriver;
+        return carDao.getAllByDriver(driverId);
     }
 }

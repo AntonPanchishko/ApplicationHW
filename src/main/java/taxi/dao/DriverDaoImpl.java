@@ -2,6 +2,7 @@ package taxi.dao;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import taxi.lib.Dao;
 import taxi.model.Driver;
 import taxi.storage.Storage;
@@ -15,10 +16,10 @@ public class DriverDaoImpl implements DriverDao {
     }
 
     @Override
-    public Driver get(Long id) {
+    public Optional<Driver> get(Long id) {
         return Storage.drivers.stream()
                 .filter(e -> Objects.equals(e.getId(), id))
-                .findFirst().get();
+                .findFirst();
     }
 
     @Override
@@ -29,9 +30,9 @@ public class DriverDaoImpl implements DriverDao {
     @Override
     public Driver update(Driver driver) {
         Long currentDriverId = driver.getId();
-        Driver oldDriver = get(currentDriverId);
+        Driver oldDriver = get(driver.getId()).get();
         Storage.drivers.set(Storage.drivers.indexOf(oldDriver), driver);
-        return get(currentDriverId);
+        return get(currentDriverId).get();
     }
 
     @Override

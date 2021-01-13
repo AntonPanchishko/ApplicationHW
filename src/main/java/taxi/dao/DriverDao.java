@@ -1,12 +1,13 @@
 package taxi.dao;
 
 import java.util.List;
+import java.util.Optional;
 import taxi.model.Driver;
 
 public interface DriverDao {
     Driver create(Driver driver);
 
-    Driver get(Long id);
+    Optional<Driver> get(Long id);
 
     List<Driver> getAll();
 
