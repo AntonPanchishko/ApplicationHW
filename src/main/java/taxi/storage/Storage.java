@@ -11,10 +11,25 @@ public class Storage {
     public static final List<Driver> drivers = new ArrayList<>();
     public static final List<Manufacturer> manufacturers = new ArrayList<>();
     private static long manufactureId = 0;
+    private static long carId = 0;
+    private static long driverId = 0;
 
-    public static void addManufacture(Manufacturer manufacturer) {
-        manufactureId++;
-        manufacturer.setId(manufactureId);
+    public static Manufacturer addManufacture(Manufacturer manufacturer) {
+        manufacturer.setId(++manufactureId);
         manufacturers.add(manufacturer);
+        return manufacturer;
+    }
+
+    public static Car addCar(Car car) {
+        carId++;
+        car.setId(++carId);
+        cars.add(car);
+        return car;
+    }
+
+    public static Driver addDriver(Driver driver) {
+        driver.setId(++driverId);
+        drivers.add(driver);
+        return driver;
     }
 }
