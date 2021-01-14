@@ -4,8 +4,6 @@ import taxi.lib.Injector;
 import taxi.model.Car;
 import taxi.model.Driver;
 import taxi.model.Manufacturer;
-import taxi.service.CarService;
-import taxi.service.DriverService;
 import taxi.service.ManufacturerService;
 
 public class Application {
@@ -31,8 +29,6 @@ public class Application {
         w221 = new Car("w221", mercedesManufacturer);
         q8 = new Car("q8", audiManufacturer);
         testManufacturerService();
-        testCarService();
-        testDriverService();
     }
 
     public static void testManufacturerService() {
@@ -48,36 +44,5 @@ public class Application {
         System.out.println(manufacturerService.getAll());
         manufacturerService.delete(5L);
         System.out.println(manufacturerService.getAll());
-    }
-
-    public static void testCarService() {
-        CarService carService =
-                (CarService) injector.getInstance(CarService.class);
-        carService.create(x5);
-        carService.create(w221);
-        carService.create(q8);
-        carService.getAll();
-        carService.addDriverToCar(vasya, x5);
-        carService.addDriverToCar(petrovich, w221);
-        carService.addDriverToCar(ivan, q8);
-        System.out.println(carService.getAll());
-        System.out.println(carService.getAllByDriver(2L));
-        carService.removeDriverFromCar(vasya, x5);
-        carService.delete(1L);
-        System.out.println(carService.getAll());
-    }
-
-    public static void testDriverService() {
-        DriverService driverService =
-                (DriverService) injector.getInstance(DriverService.class);
-        driverService.create(vasya);
-        driverService.create(ivan);
-        driverService.create(petrovich);
-        System.out.println(driverService.getAll());
-        driverService.get(1L);
-        driverService.delete(1L);
-        System.out.println(driverService.getAll());
-        driverService.update(vasya);
-        System.out.println(driverService.getAll());
     }
 }
