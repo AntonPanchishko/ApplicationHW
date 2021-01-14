@@ -35,6 +35,21 @@ public class Application {
         testDriverService();
     }
 
+    public static void testManufacturerService() {
+        ManufacturerService manufacturerService =
+                (ManufacturerService) injector.getInstance(ManufacturerService.class);
+        manufacturerService.create(bmwManufacturer);
+        manufacturerService.create(mercedesManufacturer);
+        manufacturerService.create(audiManufacturer);
+        System.out.println(manufacturerService.getAll());
+        Manufacturer updatedAudi = manufacturerService.get(4L);
+        updatedAudi.setModel("Toyota");
+        manufacturerService.update(updatedAudi);
+        System.out.println(manufacturerService.getAll());
+        manufacturerService.delete(5L);
+        System.out.println(manufacturerService.getAll());
+    }
+
     public static void testCarService() {
         CarService carService =
                 (CarService) injector.getInstance(CarService.class);
@@ -64,21 +79,5 @@ public class Application {
         System.out.println(driverService.getAll());
         driverService.update(vasya);
         System.out.println(driverService.getAll());
-    }
-
-    public static void testManufacturerService() {
-        ManufacturerService manufacturerService =
-                (ManufacturerService) injector.getInstance(ManufacturerService.class);
-
-        manufacturerService.create(bmwManufacturer);
-        manufacturerService.create(mercedesManufacturer);
-        manufacturerService.create(audiManufacturer);
-        System.out.println(manufacturerService.getAll());
-        Manufacturer updatedAudi = manufacturerService.get(1L);
-        updatedAudi.setModel("Toyota");
-        manufacturerService.update(updatedAudi);
-        System.out.println(manufacturerService.getAll());
-        manufacturerService.delete(1L);
-        System.out.println(manufacturerService.getAll());
     }
 }
