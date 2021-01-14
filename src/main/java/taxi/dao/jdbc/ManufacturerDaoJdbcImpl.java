@@ -84,7 +84,6 @@ public class ManufacturerDaoJdbcImpl implements ManufacturerDao {
             preparedStatement.setString(2, manufacturer.getCountry());
             preparedStatement.setLong(3, manufacturer.getId());
             preparedStatement.executeUpdate();
-            preparedStatement.close();
             return manufacturer;
         } catch (SQLException ex) {
             throw new DataProcessingException("Can't update "
