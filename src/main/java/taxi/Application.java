@@ -42,7 +42,7 @@ public class Application {
         updatedAudi.setModel("Toyota");
         manufacturerService.update(updatedAudi);
         System.out.println(manufacturerService.getAll());
-        manufacturerService.delete(4L);
+        manufacturerService.delete(3L);
         System.out.println(manufacturerService.getAll());
     }
 }
