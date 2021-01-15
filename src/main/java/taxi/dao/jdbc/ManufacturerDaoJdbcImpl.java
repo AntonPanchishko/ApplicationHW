@@ -18,8 +18,8 @@ import taxi.util.ConnectionUtil;
 public class ManufacturerDaoJdbcImpl implements ManufacturerDao {
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
-        String query = "INSERT INTO manufacturer (manufacturer_name, "
-                + "manufacturer_country) VALUES (?, ?)";
+        String query = "INSERT INTO manufacturer (name, "
+                + "country) VALUES (?, ?)";
         try (Connection connection = ConnectionUtil.getConnection(); PreparedStatement statement
                 = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, manufacturer.getModel());
@@ -49,8 +49,8 @@ public class ManufacturerDaoJdbcImpl implements ManufacturerDao {
             }
             return Optional.ofNullable(manufacturer);
         } catch (SQLException ex) {
-            throw new DataProcessingException("Can't get manufacturer with "
-                    + id + " id from DB", ex);
+            throw new DataProcessingException("Can't get manufacturer with id =  "
+                    + id, ex);
         }
     }
 
@@ -75,7 +75,7 @@ public class ManufacturerDaoJdbcImpl implements ManufacturerDao {
     @Override
     public Manufacturer update(Manufacturer manufacturer) {
         String query = "UPDATE manufacturer "
-                + "SET manufacturer_name = ?,manufacturer_country = ? "
+                + "SET name = ?,country = ? "
                 + "WHERE manufacturer_id = ? and deleted = false";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement preparedStatement =
@@ -106,8 +106,8 @@ public class ManufacturerDaoJdbcImpl implements ManufacturerDao {
 
     private Manufacturer createManufacturerFromDb(ResultSet resultSet) throws SQLException {
         Long id = resultSet.getObject("manufacturer_id", Long.class);
-        String name = resultSet.getObject("manufacturer_name", String.class);
-        String country = resultSet.getObject("manufacturer_country", String.class);
+        String name = resultSet.getObject("name", String.class);
+        String country = resultSet.getObject("country", String.class);
         Manufacturer manufacturer = new Manufacturer(name, country);
         manufacturer.setId(id);
         return manufacturer;

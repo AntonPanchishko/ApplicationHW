@@ -38,11 +38,11 @@ public class Application {
         manufacturerService.create(mercedesManufacturer);
         manufacturerService.create(audiManufacturer);
         System.out.println(manufacturerService.getAll());
-        Manufacturer updatedAudi = manufacturerService.get(4L);
+        Manufacturer updatedAudi = manufacturerService.get(3L);
         updatedAudi.setModel("Toyota");
         manufacturerService.update(updatedAudi);
         System.out.println(manufacturerService.getAll());
-        manufacturerService.delete(5L);
+        manufacturerService.delete(4L);
         System.out.println(manufacturerService.getAll());
     }
 }
