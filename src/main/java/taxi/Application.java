@@ -37,12 +37,13 @@ public class Application {
         manufacturerService.create(bmwManufacturer);
         manufacturerService.create(mercedesManufacturer);
         manufacturerService.create(audiManufacturer);
+        Long bmwManufacturerId = bmwManufacturer.getId();
         System.out.println(manufacturerService.getAll());
-        Manufacturer updatedAudi = manufacturerService.get(3L);
-        updatedAudi.setModel("Toyota");
-        manufacturerService.update(updatedAudi);
+        Manufacturer update = manufacturerService.get(bmwManufacturerId);
+        update.setModel("Toyota");
+        manufacturerService.update(update);
         System.out.println(manufacturerService.getAll());
-        manufacturerService.delete(3L);
+        manufacturerService.delete(update.getId());
         System.out.println(manufacturerService.getAll());
     }
 }

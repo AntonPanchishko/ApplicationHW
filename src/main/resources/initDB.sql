@@ -6,7 +6,3 @@ CREATE TABLE `manufacturer` (
                                 `deleted` tinyint NOT NULL DEFAULT '0',
                                 PRIMARY KEY (`manufacturer_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
-
-
-
-
