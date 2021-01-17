@@ -1,9 +1,10 @@
-package taxi.dao;
+package taxi.dao.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import taxi.dao.CarDao;
 import taxi.lib.Dao;
 import taxi.model.Car;
 import taxi.storage.Storage;
