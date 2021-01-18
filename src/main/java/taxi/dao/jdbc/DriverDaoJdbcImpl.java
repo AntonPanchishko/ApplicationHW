@@ -31,7 +31,7 @@ public class DriverDaoJdbcImpl implements DriverDao {
             }
             return driver;
         } catch (SQLException ex) {
-            throw new DataProcessingException("Couldn't add driver into DB ", ex);
+            throw new DataProcessingException("Couldn't add driver into DB " + driver, ex);
         }
     }
 
@@ -101,7 +101,7 @@ public class DriverDaoJdbcImpl implements DriverDao {
         }
     }
 
-    public static Driver createDriverFromDb(ResultSet resultSet) throws SQLException {
+    private Driver createDriverFromDb(ResultSet resultSet) throws SQLException {
         Long id = resultSet.getObject("driver_id", Long.class);
         String name = resultSet.getString("name");
         String licenseNumber = resultSet.getString("licence_number");

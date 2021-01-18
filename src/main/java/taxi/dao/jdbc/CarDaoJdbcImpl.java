@@ -33,7 +33,7 @@ public class CarDaoJdbcImpl implements CarDao {
             }
             return car;
         } catch (SQLException ex) {
-            throw new DataProcessingException("Couldn't add car into DB ", ex);
+            throw new DataProcessingException("Couldn't add car into DB " + car, ex);
         }
     }
 
@@ -54,7 +54,7 @@ public class CarDaoJdbcImpl implements CarDao {
                 car = createCarFromDb(resultSet);
                 car.setDrivers(getDriversForCar(id, connection));
             }
-            return Optional.of(car);
+            return Optional.ofNullable(car);
         } catch (SQLException ex) {
             throw new DataProcessingException("Can't get car with id = "
                     + id, ex);
@@ -142,7 +142,7 @@ public class CarDaoJdbcImpl implements CarDao {
 
     private Car createCarFromDb(ResultSet resultSet) throws SQLException {
         Long id = resultSet.getObject("car_id", Long.class);
-        Manufacturer manufacturer = ManufacturerDaoJdbcImpl.createManufacturerFromDb(resultSet);
+        Manufacturer manufacturer = createManufacturerFromDb(resultSet);
         String model = resultSet.getObject("model", String.class);
         Car car = new Car(model, manufacturer);
         car.setId(id);
@@ -160,7 +160,7 @@ public class CarDaoJdbcImpl implements CarDao {
             ResultSet resultSet = statement.executeQuery();
             List<Driver> drivers = new ArrayList<>();
             while (resultSet.next()) {
-                drivers.add(DriverDaoJdbcImpl.createDriverFromDb(resultSet));
+                drivers.add(createDriverFromDb(resultSet));
             }
             return drivers;
         } catch (SQLException e) {
@@ -168,7 +168,7 @@ public class CarDaoJdbcImpl implements CarDao {
         }
     }
 
-    private boolean insertNewDateInCarDriver(Long driverId, Long carId) {
+    private void insertNewDateInCarDriver(Long driverId, Long carId) {
         String queryForInsert = "INSERT INTO car_driver (driver_id, car_id) "
                 + "VALUES (?, ?) ";
         try (Connection connection = ConnectionUtil.getConnection();
@@ -176,23 +176,41 @@ public class CarDaoJdbcImpl implements CarDao {
                         connection.prepareStatement(queryForInsert)) {
             statementForInsert.setLong(1, driverId);
             statementForInsert.setLong(2, carId);
-            return statementForInsert.executeUpdate() > 0;
+            statementForInsert.executeUpdate();
         } catch (SQLException ex) {
             throw new DataProcessingException("Cant insert into car_driver db", ex);
         }
     }
 
-    private boolean deleteObjectInCarDriverById(Long id) {
+    private void deleteObjectInCarDriverById(Long id) {
         String queryForDeleteDriver = "DELETE "
                 + "FROM car_driver "
                 + " WHERE car_id = ? ";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(queryForDeleteDriver)) {
             statement.setLong(1, id);
-            return statement.executeUpdate() > 0;
+            statement.executeUpdate();
         } catch (SQLException ex) {
             throw new DataProcessingException("Can't delete elements by id "
                     + id, ex);
         }
+    }
+
+    private Manufacturer createManufacturerFromDb(ResultSet resultSet) throws SQLException {
+        Long id = resultSet.getObject("manufacturer_id", Long.class);
+        String name = resultSet.getObject("name", String.class);
+        String country = resultSet.getObject("country", String.class);
+        Manufacturer manufacturer = new Manufacturer(name, country);
+        manufacturer.setId(id);
+        return manufacturer;
+    }
+
+    private Driver createDriverFromDb(ResultSet resultSet) throws SQLException {
+        Long id = resultSet.getObject("driver_id", Long.class);
+        String name = resultSet.getString("name");
+        String licenseNumber = resultSet.getString("licence_number");
+        Driver driver = new Driver(name, licenseNumber);
+        driver.setId(id);
+        return driver;
     }
 }
