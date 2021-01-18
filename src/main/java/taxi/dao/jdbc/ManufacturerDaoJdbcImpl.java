@@ -103,7 +103,7 @@ public class ManufacturerDaoJdbcImpl implements ManufacturerDao {
         }
     }
 
-    private Manufacturer createManufacturerFromDb(ResultSet resultSet) throws SQLException {
+    public static Manufacturer createManufacturerFromDb(ResultSet resultSet) throws SQLException {
         Long id = resultSet.getObject("manufacturer_id", Long.class);
         String name = resultSet.getObject("name", String.class);
         String country = resultSet.getObject("country", String.class);
