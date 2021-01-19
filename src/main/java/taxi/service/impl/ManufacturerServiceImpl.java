@@ -1,4 +1,4 @@
-package taxi.service.serviceImpls;
+package taxi.service.impl;
 
 import java.util.List;
 import taxi.dao.ManufacturerDao;
