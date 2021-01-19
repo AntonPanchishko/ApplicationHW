@@ -4,7 +4,7 @@ import java.util.List;
 import taxi.model.Car;
 import taxi.model.Driver;
 
-public interface CarService {
+public interface CarService extends GenericService<Car, Long> {
     Car create(Car car);
 
     Car get(Long id);

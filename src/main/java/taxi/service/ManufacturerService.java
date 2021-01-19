@@ -3,7 +3,7 @@ package taxi.service;
 import java.util.List;
 import taxi.model.Manufacturer;
 
-public interface ManufacturerService {
+public interface ManufacturerService extends GenericService<Manufacturer, Long> {
     Manufacturer create(Manufacturer manufacturer);
 
     Manufacturer get(Long id);

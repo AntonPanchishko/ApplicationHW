@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import taxi.model.Driver;
 
-public interface DriverDao {
+public interface DriverDao extends GenericDao<Driver, Long> {
     Driver create(Driver driver);
 
     Optional<Driver> get(Long id);
