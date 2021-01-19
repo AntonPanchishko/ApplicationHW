@@ -99,9 +99,15 @@ public class CarDaoJdbcImpl implements CarDao {
             throw new DataProcessingException("Can't update car " + car.getModel(), ex);
         }
         deleteObjectInCarDriverById(car.getId());
-        for (int i = 0; i < car.getDrivers().size(); i++) {
-            insertNewDateInCarDriver(car.getDrivers().get(i).getId(), car.getId());
+
+        try (Connection connection = ConnectionUtil.getConnection()) {
+            for (int i = 0; i < car.getDrivers().size(); i++) {
+                insertNewDateInCarDriver(car.getDrivers().get(i).getId(), car.getId(), connection);
+            }
+        } catch (SQLException ex) {
+            throw new DataProcessingException("Can't insert car_id into DB car_driver " + car, ex);
         }
+
         return car;
     }
 
@@ -120,11 +126,11 @@ public class CarDaoJdbcImpl implements CarDao {
 
     @Override
     public List<Car> getAllByDriver(Long driverId) {
-        String query = "SELECT cd.car_id "
-                + "FROM car_driver cd "
-                + "INNER JOIN driver d "
-                + "ON cd.driver_id = d.driver_id "
-                + "WHERE d.driver_id = ? AND deleted = false ";
+        String query = "SELECT cd.car_id, model, c.manufacturer_id, manufacturer_name, origin "
+                + "FROM cars_drivers cd "
+                + "INNER JOIN cars c ON cd.car_id = c.car_id "
+                + "INNER JOIN drivers d ON d.driver_id = cd.driver_id "
+                + "WHERE cd.driver_id = ? AND d.deleted = FALSE AND c.deleted = FALSE ";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, driverId);
@@ -168,11 +174,10 @@ public class CarDaoJdbcImpl implements CarDao {
         }
     }
 
-    private void insertNewDateInCarDriver(Long driverId, Long carId) {
+    private void insertNewDateInCarDriver(Long driverId, Long carId, Connection connection) {
         String queryForInsert = "INSERT INTO car_driver (driver_id, car_id) "
                 + "VALUES (?, ?) ";
-        try (Connection connection = ConnectionUtil.getConnection();
-                PreparedStatement statementForInsert =
+        try (PreparedStatement statementForInsert =
                         connection.prepareStatement(queryForInsert)) {
             statementForInsert.setLong(1, driverId);
             statementForInsert.setLong(2, carId);
