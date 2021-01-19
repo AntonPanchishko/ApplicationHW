@@ -102,7 +102,7 @@ public class CarDaoJdbcImpl implements CarDao {
 
         try (Connection connection = ConnectionUtil.getConnection()) {
             for (int i = 0; i < car.getDrivers().size(); i++) {
-                insertNewDateInCarDriver(car.getDrivers().get(i).getId(), car.getId(), connection);
+                insertNewDriver(car.getDrivers().get(i).getId(), car.getId(), connection);
             }
         } catch (SQLException ex) {
             throw new DataProcessingException("Can't insert car_id into DB car_driver " + car, ex);
@@ -174,7 +174,7 @@ public class CarDaoJdbcImpl implements CarDao {
         }
     }
 
-    private void insertNewDateInCarDriver(Long driverId, Long carId, Connection connection) {
+    private void insertNewDriver(Long driverId, Long carId, Connection connection) {
         String queryForInsert = "INSERT INTO car_driver (driver_id, car_id) "
                 + "VALUES (?, ?) ";
         try (PreparedStatement statementForInsert =

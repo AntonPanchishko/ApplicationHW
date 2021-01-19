@@ -30,7 +30,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Car update(Car car) {
-        return carDao.create(car);
+        return carDao.update(car);
     }
 
     @Override
