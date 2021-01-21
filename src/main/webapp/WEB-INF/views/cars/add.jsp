@@ -5,9 +5,10 @@
 </head>
 <body>
 <h1>Provide new car</h1>
+<h5 style="color: midnightblue">${message}</h5>
 <form method="post" action="${pageContext.request.contextPath}/cars/add">
-    Enter manufacturer_id<input type="text" name="manufacturer_id"><br>
-    Enter model<input type="text" name="model"><br>
+    Enter manufacturer_id<input type="number" min="1" name="manufacturer_id" required><br>
+    Enter model<input type="text" name="model" required><br>
     <button type="submit">Add car</button>
 </form>
 </body>

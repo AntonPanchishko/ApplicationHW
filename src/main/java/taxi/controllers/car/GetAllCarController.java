@@ -10,10 +10,10 @@ import taxi.lib.Injector;
 import taxi.model.Car;
 import taxi.service.CarService;
 
-public class CarController extends HttpServlet {
-    private static final Injector injector = Injector.getInstance("taxi");
+public class GetAllCarController extends HttpServlet {
+    private static final Injector INJECTOR = Injector.getInstance("taxi");
     private CarService carService = (CarService)
-            injector.getInstance(CarService.class);
+            INJECTOR.getInstance(CarService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)

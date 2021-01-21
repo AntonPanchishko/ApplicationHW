@@ -9,9 +9,9 @@ import taxi.lib.Injector;
 import taxi.service.ManufacturerService;
 
 public class DeleteManufacturerController extends HttpServlet {
-    private static final Injector injector = Injector.getInstance("taxi");
+    private static final Injector INJECTOR = Injector.getInstance("taxi");
     private ManufacturerService manufacturerService =
-            (ManufacturerService) injector.getInstance(ManufacturerService.class);
+            (ManufacturerService) INJECTOR.getInstance(ManufacturerService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)

@@ -9,8 +9,8 @@ import taxi.lib.Injector;
 import taxi.service.DriverService;
 
 public class DeleteDriverController extends HttpServlet {
-    private static final Injector injector = Injector.getInstance("taxi");
-    private DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
+    private static final Injector INJECTOR = Injector.getInstance("taxi");
+    private DriverService driverService = (DriverService) INJECTOR.getInstance(DriverService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
