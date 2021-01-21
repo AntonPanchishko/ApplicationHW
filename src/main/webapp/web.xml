@@ -102,5 +102,12 @@
         <url-pattern>/cars/delete</url-pattern>
     </servlet-mapping>
 
-
+    <servlet>
+        <servlet-name>loginPage</servlet-name>
+        <servlet-class>taxi.controllers.LoginController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>loginPage</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
 </web-app>
