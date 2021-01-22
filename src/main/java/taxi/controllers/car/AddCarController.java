@@ -1,7 +1,6 @@
 package taxi.controllers.car;
 
 import java.io.IOException;
-import java.util.NoSuchElementException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,16 +27,12 @@ public class AddCarController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        try {
-            String model = req.getParameter("model");
-            Long manufacturerId = Long.parseLong(req.getParameter("manufacturer_id"));
-            Manufacturer manufacturer = manufacturerService.get(manufacturerId);
-            Car car = new Car(model, manufacturer);
-            carService.create(car);
-            resp.sendRedirect(req.getContextPath() + "/");
-        } catch (NoSuchElementException e) {
-            req.setAttribute("message", "You put incorrect data. No manufacturer with such ID");
-            req.getRequestDispatcher("/WEB-INF/views/cars/add.jsp").forward(req, resp);
-        }
+
+        String model = req.getParameter("model");
+        Long manufacturerId = Long.parseLong(req.getParameter("manufacturer_id"));
+        Manufacturer manufacturer = manufacturerService.get(manufacturerId);
+        Car car = new Car(model, manufacturer);
+        carService.create(car);
+        resp.sendRedirect(req.getContextPath() + "/");
     }
 }
