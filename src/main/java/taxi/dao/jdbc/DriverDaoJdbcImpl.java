@@ -18,8 +18,8 @@ import taxi.util.ConnectionUtil;
 public class DriverDaoJdbcImpl implements DriverDao {
     @Override
     public Driver create(Driver driver) {
-        String query = "INSERT INTO driver (name, licence_number, login, password) " +
-                "VALUE (?, ?, ?, ?)";
+        String query = "INSERT INTO driver (name, licence_number, login, password) "
+                + "VALUE (?, ?, ?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(query,
                         Statement.RETURN_GENERATED_KEYS)) {
@@ -111,7 +111,7 @@ public class DriverDaoJdbcImpl implements DriverDao {
         String query = "SELECT * FROM driver WHERE login = ? AND deleted = false";
         Driver driver = null;
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+                PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, login);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
