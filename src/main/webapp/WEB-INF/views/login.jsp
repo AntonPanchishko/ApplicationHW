@@ -10,6 +10,7 @@
     Enter login <input type="text" name="login" required><br>
     Enter password <input type="text" name="password" required><br>
     <button type="submit">Login</button>
+    <p><a href="${pageContext.request.contextPath}/drivers/add">create Driver</a></p>
 </form>
 </body>
 </html>
