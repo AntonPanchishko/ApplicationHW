@@ -9,7 +9,7 @@
     Enter name<input type="text" name="name" required><br>
     Enter licence number<input type="text" name="licence_number" required><br>
     Enter login <input type="text" name="login" required><br>
-    Enter password <input type="text" name="password" required><br>
+    Enter password <input type="password" name="password" required><br>
     <button type="submit">Add driver</button>
 </form>
 </body>

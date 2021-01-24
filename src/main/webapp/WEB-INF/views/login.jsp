@@ -8,7 +8,7 @@
 <p style="color: darkred">${errorMsg}</p>
 <form action="${pageContext.request.contextPath}/login" method="post">
     Enter login <input type="text" name="login" required><br>
-    Enter password <input type="text" name="password" required><br>
+    Enter password <input type="password" name="password" required><br>
     <button type="submit">Login</button>
     <p><a href="${pageContext.request.contextPath}/drivers/add">create Driver</a></p>
 </form>
