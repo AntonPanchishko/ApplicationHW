@@ -1,6 +1,8 @@
 package taxi.web.filters;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -10,16 +12,16 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import taxi.lib.Injector;
-import taxi.service.DriverService;
 
 public class AuthenticationFilter implements Filter {
     private static final Injector INJECTOR = Injector.getInstance("taxi");
     private static final String DRIVER_ID = "driver_id";
-    private DriverService driverService = (DriverService) INJECTOR.getInstance(DriverService.class);
+    private final Set<String> allowedUrls = new HashSet<>();
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
+        allowedUrls.add("/login");
+        allowedUrls.add("/drivers/create");
     }
 
     @Override
@@ -27,15 +29,13 @@ public class AuthenticationFilter implements Filter {
                          FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
-
         String url = req.getServletPath();
-        if (url.equals("/login") || url.equals("/drivers/add")) {
+        if (allowedUrls.contains(url)) {
             filterChain.doFilter(req, resp);
             return;
         }
-
         Long driverId = (Long) req.getSession().getAttribute(DRIVER_ID);
-        if (req.getSession().getAttribute(DRIVER_ID) == null) {
+        if (driverId == null) {
             resp.sendRedirect(req.getContextPath() + "/login");
             return;
         }
