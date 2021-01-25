@@ -102,21 +102,5 @@
         <url-pattern>/cars/delete</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>loginPage</servlet-name>
-        <servlet-class>taxi.controllers.LoginController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>loginPage</servlet-name>
-        <url-pattern>/login</url-pattern>
-    </servlet-mapping>
 
-    <filter>
-        <filter-name>authenticationFilter</filter-name>
-        <filter-class>taxi.web.filters.AuthenticationFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>authenticationFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
 </web-app>
