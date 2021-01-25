@@ -10,7 +10,7 @@ import taxi.lib.Injector;
 import taxi.model.Manufacturer;
 import taxi.service.ManufacturerService;
 
-public class GetAllManufacturerController extends HttpServlet {
+public class GetAllManufacturersController extends HttpServlet {
     private static final Injector INJECTOR = Injector.getInstance("taxi");
     private ManufacturerService manufacturerService =
             (ManufacturerService) INJECTOR.getInstance(ManufacturerService.class);

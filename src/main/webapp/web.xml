@@ -59,7 +59,7 @@
 
     <servlet>
         <servlet-name>allManufacturers</servlet-name>
-        <servlet-class>taxi.controllers.manufacturer.GetAllManufacturerController</servlet-class>
+        <servlet-class>taxi.controllers.manufacturer.GetAllManufacturersController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>allManufacturers</servlet-name>
@@ -86,7 +86,7 @@
 
     <servlet>
         <servlet-name>allCars</servlet-name>
-        <servlet-class>taxi.controllers.car.GetAllCarController</servlet-class>
+        <servlet-class>taxi.controllers.car.GetAllCarsController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>allCars</servlet-name>
