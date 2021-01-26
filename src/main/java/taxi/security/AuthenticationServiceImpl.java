@@ -6,6 +6,8 @@ import taxi.lib.Service;
 import taxi.model.Driver;
 import taxi.service.DriverService;
 
+import java.util.Optional;
+
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
     @Inject
@@ -13,11 +15,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public Driver login(String login, String password) throws AuthenticationException {
-        Driver driverByLogin = driverService.findByLogin(login)
-                .orElseThrow(() -> new AuthenticationException("Incorrect user login or password"));
-        if (driverByLogin.getPassword().equals(password)) {
-            return driverByLogin;
+        Optional<Driver> driverFromDB = driverService.findByLogin(login);
+        if (driverFromDB.isPresent() && driverFromDB.get().getPassword().equals(password)) {
+            return driverFromDB.get();
         }
-        throw new AuthenticationException("Incorrect user login or password");
+        throw new AuthenticationException("Incorrect username or password");
     }
 }
