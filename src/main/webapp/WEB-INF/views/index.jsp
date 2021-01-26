@@ -12,5 +12,7 @@
 <p><a href="${pageContext.request.contextPath}/manufacturers/all">all Manufacturers</a></p>
 <p><a href="${pageContext.request.contextPath}/drivers/all">all Drivers</a></p>
 <p><a href="${pageContext.request.contextPath}/cars/all">all Cars</a></p>
+
+<p><a href="${pageContext.request.contextPath}/login">Login</a></p>
 </body>
 </html>

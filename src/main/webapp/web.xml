@@ -18,7 +18,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>allDrivers</servlet-name>
-        <url-pattern>/drivers</url-pattern>
+        <url-pattern>/drivers/all</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -59,11 +59,11 @@
 
     <servlet>
         <servlet-name>allManufacturers</servlet-name>
-        <servlet-class>taxi.controllers.manufacturer.GetAllManufacturersController</servlet-class>
+        <servlet-class>taxi.controllers.manufacturer.GetAllManufacturerController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>allManufacturers</servlet-name>
-        <url-pattern>/manufacturers</url-pattern>
+        <url-pattern>/manufacturers/all</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -86,11 +86,11 @@
 
     <servlet>
         <servlet-name>allCars</servlet-name>
-        <servlet-class>taxi.controllers.car.GetAllCarsController</servlet-class>
+        <servlet-class>taxi.controllers.car.GetAllCarController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>allCars</servlet-name>
-        <url-pattern>/cars</url-pattern>
+        <url-pattern>/cars/all</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -101,5 +101,6 @@
         <servlet-name>deleteCar</servlet-name>
         <url-pattern>/cars/delete</url-pattern>
     </servlet-mapping>
+
 
 </web-app>
